@@ -76,3 +76,5 @@ stxxl.errlog
 # Deprecated config file #
 ##########################
 /server.ini
+
+*.swp

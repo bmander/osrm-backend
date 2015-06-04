@@ -194,6 +194,20 @@ template <class DataFacadeT> class MapMatchingPlugin : public BasePlugin
             }
             subtrace.values["geometry"] =
                 factory.AppendGeometryString(route_parameters.compression);
+
+            /*osrm::json::Array raw_ways;
+            for ( auto &segment : factory.path_description)
+            {
+                raw_ways.values.emplace_back( segment.name_id );
+            }
+            subtrace.values["ways"] = raw_ways;*/
+
+            osrm::json::Array raw_nodes;
+            for ( auto &segment : factory.path_description)
+            {
+                raw_nodes.values.emplace_back( segment.node_id );
+            }
+            subtrace.values["nodes"] = raw_nodes;
         }
 
         subtrace.values["indices"] = osrm::json::make_array(sub.indices);
@@ -206,6 +220,8 @@ template <class DataFacadeT> class MapMatchingPlugin : public BasePlugin
                                        node.location.lon / COORDINATE_PRECISION));
         }
         subtrace.values["matched_points"] = points;
+
+
 
         return subtrace;
     }
